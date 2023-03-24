@@ -1,3 +1,3 @@
 # Mascarade
 
-The infamous board game.
+Doing this in java was a mistake.
