@@ -2,3 +2,34 @@ masc_players [1]
 masc_cards [2]
 masc_scurrency [3]
 masc_status [4]
+
+    public players(int numPlayers) {
+        if (numPlayers < 2 || numPlayers > 16) {
+            throw new IllegalArgumentException("Invalid number of players.");
+        }
+
+        playersList = new ArrayList<>();
+        coinsHandler = new Coins();
+        Set<String> usedNames = new HashSet<>();
+
+        for (int i = 0; i < numPlayers; i++) {
+            String name = generateName(usedNames);
+            usedNames.add(name);
+            Player player = new Player(name);
+            player.setCoins(6);
+            playersList.add(player);
+        }
+    }
+
+    public final String getPlyName() {
+        return PLY_NAME;
+    }
+
+    private static final Map<String, Boolean> ANSWER_MAP = new HashMap<String, Boolean>() {
+        {
+            put("yes", true);
+            put("y", true);
+            put("no", false);
+            put("n", false);
+        }
+    };
