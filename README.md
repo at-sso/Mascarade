@@ -1,2 +1,3 @@
-# sso.Mascarade
- The infamous board game.
+# Mascarade
+
+The infamous board game.
