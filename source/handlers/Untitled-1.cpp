@@ -1,43 +1,27 @@
-#ifndef M_PLAYERS_H
-#define M_PLAYERS_H
-
-#include <random>
-#include <string>
 #include <map>
+#include <functional>
+#include <vector>
+#include <random>
 #include <algorithm>
 
-class PLY_HANDLER
+class MyClass
 {
 public:
-    PLY_HANDLER(const std::string &playerName, int playerAge, int numPlayers)
-        : PLY_NAME(playerName), PLY_AGE(playerAge), NUMOF_PLY(numPlayers)
+    // Define a template function that takes a function pointer and returns a lambda
+    template <typename T>
+    auto make_lambda(T func_ptr)
     {
-        if (numPlayers < 2 || numPlayers > GC_MAX)
-        {
-            throw std::invalid_argument("PLY_HANDLER: Invalid number of players.");
-        }
-
-        // Generate names and ages for all players
-        std::vector<std::string> existingPlayers;
-        std::vector<int> playersAge;
-        existingPlayers.push_back(PLY_NAME);
-        playersAge.push_back(PLY_AGE);
-
-        for (int i = 1; i < numPlayers; i++)
-        {
-            std::string newName = generateNames(existingPlayers);
-            generateAge(playersAge);
-        }
+        return [=](auto... args)
+        { return (this->*func_ptr)(args...); };
     }
 
-#include "m_coins.h"
+    // Define the map with string keys and function values
+    std::map<std::string, std::function<void()>> DEV_COMMANDS = {
+        {"ply.array", make_lambda(&MyClass::getNamesArray)},
+        {"ply.genage", make_lambda(&MyClass::generateAge)},
+        {"ply.genname", make_lambda(&MyClass::generateNames)}};
 
 private:
-    static const int GC_MAX = 13;
-    std::string PLY_NAME;
-    double PLY_AGE;
-    int NUMOF_PLY;
-
     std::vector<std::string> NAMES = {
         "Arvaela", "Sylvard", "Baeloria",
         "Zephyrin", "Quinleth", "Orynthea",
@@ -46,6 +30,11 @@ private:
         "Rythandria", "Eryndelle", "Zaeloria",
         "Arinthea", "Lyvandria", "Orindale",
         "Faeloria", "Neryndor", "sso"};
+
+    std::string getNamesArray(int index)
+    {
+        return NAMES[index];
+    }
 
     std::string generateNames(std::vector<std::string> &existingNames)
     {
@@ -70,11 +59,19 @@ private:
         std::uniform_real_distribution<double> dist(1.0, 20.0);
         existingAge.push_back(dist(mt));
     }
-
-    std::map<std::string, bool> ANSWER_MAP = {
-        {"y", true},
-        {"n", false},
-    };
 };
 
-#endif // M_PLAYERS_H
+int main()
+{
+    MyClass myClass;
+
+    // Call the functions in the map
+    std::vector<std::string> existingNames;
+    std::vector<int> existingAge;
+
+    myClass.DEV_COMMANDS["ply.array"](0);
+    myClass.DEV_COMMANDS["ply.genage"](existingAge);
+    myClass.DEV_COMMANDS["ply.genname"](existingNames);
+
+    return 0;
+}

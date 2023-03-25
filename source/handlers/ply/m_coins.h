@@ -1,6 +1,7 @@
 #ifndef M_COINS_H
 #define M_COINS_H
 
+/* Included within the player's handler */
 class COINS_FIX
 {
 private:
@@ -10,7 +11,7 @@ private:
 public:
     COINS_FIX() : MAIN_COINS(6) {}
 
-    // Modifies the GC value.
+    // Modifies the coins value.
     int modCoins(int value)
     {
         if (value < 0 || value > GC_MAX)
@@ -20,13 +21,13 @@ public:
         return MAIN_COINS = value;
     }
 
-    // Returns the GC value.
+    // Returns the coins value.
     int getCoins()
     {
         return MAIN_COINS;
     }
 
-    // Will add more GC.
+    // Will add more coins.
     void addCoins(int amount)
     {
         if (MAIN_COINS + amount > GC_MAX)
@@ -36,7 +37,7 @@ public:
         MAIN_COINS += amount;
     }
 
-    // Will remove GC.
+    // Will remove coins.
     void delCoins(int amount)
     {
         if (MAIN_COINS - amount < 0)
@@ -52,6 +53,5 @@ public:
         return MAIN_COINS >= amount;
     }
 };
-COINS_FIX COINS_HANDLE;
 
 #endif

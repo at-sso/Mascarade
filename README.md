@@ -1,3 +1,4 @@
 # Mascarade
 
-Doing this in java was a mistake.
+Doing this in Java was a mistake.
+But not in C++.
