@@ -9,20 +9,24 @@
 class PLY_HANDLER
 {
 public:
-    PLY_HANDLER(const std::string &playerName, int numPlayers) : COINS_HANDLE(), PLY_NAME(playerName), NUMOF_PLY(numPlayers)
+    PLY_HANDLER(const std::string &playerName, int playerAge, int numPlayers)
+        : PLY_NAME(playerName), PLY_AGE(playerAge), NUMOF_PLY(numPlayers)
     {
         if (numPlayers < 2 || numPlayers > GC_MAX)
         {
             throw std::invalid_argument("PLY_HANDLER: Invalid number of players.");
         }
 
-        // Generate names for all players
+        // Generate names and ages for all players
         std::vector<std::string> existingPlayers;
+        std::vector<int> playersAge;
         existingPlayers.push_back(PLY_NAME);
+        playersAge.push_back(PLY_AGE);
+
         for (int i = 1; i < numPlayers; i++)
         {
             std::string newName = generateNames(existingPlayers);
-            existingPlayers.push_back(newName);
+            generateAge(playersAge);
         }
     }
 
@@ -31,6 +35,7 @@ public:
 private:
     static const int GC_MAX = 13;
     std::string PLY_NAME;
+    double PLY_AGE;
     int NUMOF_PLY;
 
     std::vector<std::string> NAMES = {
@@ -41,21 +46,31 @@ private:
         "Rythandria", "Eryndelle", "Zaeloria",
         "Arinthea", "Lyvandria", "Orindale",
         "Faeloria", "Neryndor", "sso"};
-    std::string generateNames(const std::vector<std::string> &existingNames)
+
+    std::string generateNames(std::vector<std::string> &existingNames)
     {
         std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> dis(0, NAMES.size() - 1);
 
-        while (true)
+        std::string newName;
+        do
         {
-            std::string newName = NAMES[dis(gen)];
-            if (std::find(existingNames.begin(), existingNames.end(), newName) == existingNames.end())
-            {
-                return newName;
-            }
-        }
+            newName = NAMES[dis(gen)];
+        } while (std::find(existingNames.begin(), existingNames.end(), newName) != existingNames.end());
+
+        existingNames.push_back(newName);
+        return newName;
     }
+
+    void generateAge(std::vector<int> &existingAge)
+    {
+        std::random_device rd;
+        std::mt19937 mt(rd());
+        std::uniform_real_distribution<double> dist(1.0, 20.0);
+        existingAge.push_back(dist(mt));
+    }
+
     std::map<std::string, bool> ANSWER_MAP = {
         {"y", true},
         {"n", false},
