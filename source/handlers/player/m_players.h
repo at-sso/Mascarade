@@ -27,13 +27,25 @@ public:
         }
     }
 
-    std::string getArray(const int &index) { return NAMES[index]; }
+    std::string getArray(const int &index)
+    {
+        return NAMES[index];
+    }
 
-    std::string getNameGen(std::vector<std::string> &existingNames) { return generateNames(existingNames); }
+    std::string getNameGen(std::vector<std::string> &existingNames)
+    {
+        return generateNames(existingNames);
+    }
 
-    void getAgeGen(std::vector<int> &existingAge) { return generateAge(existingAge); }
+    void getAgeGen(std::vector<int> &existingAge)
+    {
+        return generateAge(existingAge);
+    }
 
-    double getAge() { return PLY_AGE; }
+    double getAge()
+    {
+        return PLY_AGE;
+    }
 
     std::string getName() { return PLY_NAME; }
 
@@ -70,21 +82,41 @@ class DEFINE_PLAYERS
 {
 public:
     DEFINE_PLAYERS(const std::string &playerName, size_t playerAge, size_t numPlayers)
-        : playerHandler(playerName, playerAge, numPlayers), coinsHandler() {}
+        : ply_h(playerName, playerAge, numPlayers), coin_h() {}
 
-    // Getters for player name and age
-    const std::string getPlayerName() { return playerHandler.getName(); }
-    const double getPlayerAge() { return playerHandler.getAge(); }
+    const std::string getPlayerName()
+    {
+        return ply_h.getName();
+    }
 
-    // Coin handling methods
-    const int getCoins() { return coinsHandler.getCoins(); }
-    void addCoins(int amount) { coinsHandler.addCoins(amount); }
-    void delCoins(int amount) { coinsHandler.delCoins(amount); }
-    const bool hasCoins(int amount) { return coinsHandler.hasCoins(amount); }
+    const double getPlayerAge()
+    {
+        return ply_h.getAge();
+    }
+
+    const int getCoins()
+    {
+        return coin_h.getCoins();
+    }
+
+    void addCoins(int amount)
+    {
+        coin_h.addCoins(amount);
+    }
+
+    void delCoins(int amount)
+    {
+        coin_h.delCoins(amount);
+    }
+
+    const bool hasCoins(int amount)
+    {
+        return coin_h.hasCoins(amount);
+    }
 
 private:
-    PLAYER_HANDLER playerHandler;
-    COINS_HANDLER coinsHandler;
+    PLAYER_HANDLER ply_h;
+    COINS_HANDLER coin_h;
 };
 
 #endif // M_PLAYERS_H

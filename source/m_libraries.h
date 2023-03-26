@@ -11,9 +11,9 @@
 RANDOM_FUNCTIONS funcRand;
 MAP_HANDLER funcMap;
 // Handling
-#include "handlers/m_players.h"
-#include "handlers/m_cards.h"
+#include "handlers/player/m_players.h"
+#include "handlers/cards/m_cards.h"
 // Final fixes
-#include "make/m_makeall.hh"
+#include "main/m_makeall.hh"
 
 #endif
