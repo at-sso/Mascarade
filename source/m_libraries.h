@@ -1,5 +1,5 @@
-#ifndef _MASC_H
-#define _MASC_H
+#ifndef M_LIBRARIES_H
+#define M_LIBRARIES_H
 
 // Frequently used libraries
 #include <stdexcept>
@@ -14,6 +14,6 @@ MAP_HANDLER funcMap;
 #include "handlers/m_players.h"
 #include "handlers/m_cards.h"
 // Final fixes
-#include "layout/m_makeall.hh"
+#include "make/m_makeall.hh"
 
 #endif

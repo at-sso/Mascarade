@@ -15,7 +15,7 @@ public:
     {
         if (value < 0 || value > __COIN_MAX)
         {
-            throw std::invalid_argument("COINS_HANDLER: Invalid coin value.");
+            throw std::invalid_argument("COINS_HANDLER: Prohibited coin value.");
         }
         return MAIN_COINS = value;
     }

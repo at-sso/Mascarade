@@ -6,44 +6,17 @@
 class DEFINE_CARDS
 {
 public:
-    std::string generateCard()
-    {
-        std::string card;
-        switch (cardIndex)
-        {
-        case 0:
-            return card = CARDS_ARRAY[0];
-        case 1:
-            return card = CARDS_ARRAY[1];
-        case 2:
-            return card = CARDS_ARRAY[2];
-        case 3:
-            return card = CARDS_ARRAY[3];
-        case 4:
-            return card = CARDS_ARRAY[4];
-        case 5:
-            return card = CARDS_ARRAY[5];
-        case 6:
-            return card = CARDS_ARRAY[6];
-        case 7:
-            return card = CARDS_ARRAY[7];
-        case 8:
-            return card = CARDS_ARRAY[8];
-        case 9:
-            return card = CARDS_ARRAY[9];
-        case 10:
-            return card = CARDS_ARRAY[10];
-        }
-    }
-
     static const char *cardsArray(int i)
     {
         return CARDS_ARRAY[i];
     }
 
-private:
-    int cardIndex = funcRand.returnRandInt(0, 11);
+    static const char *randCardsGen()
+    {
+        return CARDS_ARRAY[funcRand.returnRandInt(0, 10)];
+    }
 
+private:
     static constexpr const char *CARDS_ARRAY[11] = {
         "Spy", "Bishop", "Fool", "Inquisitor",
         "Judge", "Peasant", "Queen", "King",
