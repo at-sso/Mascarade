@@ -2,19 +2,18 @@
 #define M_COINS_H
 
 /* Included within the player's handler */
-class COINS_FIX
+class COINS_HANDLER
 {
 private:
-    static const int GC_MAX = 13;
     int MAIN_COINS;
 
 public:
-    COINS_FIX() : MAIN_COINS(6) {}
+    COINS_HANDLER() : MAIN_COINS(6) {}
 
     // Modifies the coins value.
     int modCoins(int value)
     {
-        if (value < 0 || value > GC_MAX)
+        if (value < 0 || value > __COIN_MAX)
         {
             throw std::invalid_argument("COINS_HANDLER: Invalid coin value.");
         }
@@ -27,10 +26,10 @@ public:
         return MAIN_COINS;
     }
 
-    // Will add more coins.
+    // Will add coins.
     void addCoins(int amount)
     {
-        if (MAIN_COINS + amount > GC_MAX)
+        if (MAIN_COINS + amount > __COIN_MAX)
         {
             throw std::overflow_error("COINS_HANDLER: Value over 13.");
         }
@@ -47,7 +46,7 @@ public:
         MAIN_COINS -= amount;
     }
 
-    // Verifies if the ply has x amount of coins.
+    // Verifies if the player has x amount of coins.
     bool hasCoins(int amount)
     {
         return MAIN_COINS >= amount;
