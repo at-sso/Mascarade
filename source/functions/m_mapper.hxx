@@ -17,7 +17,7 @@ private:
     {
         if (ANSWER_MAP.count(input) == negative)
         {
-            throw std::out_of_range("Key " + input + " does not exist in the map.");
+            throw std::out_of_range("TRY_STRING_TO_X: Key: " + input + " does not exist in the map.");
         }
         return ANSWER_MAP.at(input);
     }

@@ -3,12 +3,17 @@
 
 #include <cstring>
 
-static constexpr int __CARD_MAX = 11;
+static constexpr int CARD_MAX = 11;
 
 class DEFINE_CARDS
 {
 public:
-    static const char *cardsArray(int index)
+    static const char *const *cardsArray()
+    {
+        return CARDS_ARRAY;
+    }
+
+    static const char *cardsArrayAt(int index)
     {
         return CARDS_ARRAY[index];
     }
@@ -20,9 +25,9 @@ public:
 
     static const int verifyCards(const char *_char, int &_int)
     {
-        for (int j = 0; j < __CARD_MAX; j++)
+        for (int j = 0; j < CARD_MAX; j++)
         {
-            if (strcmp(_char, cardsArray(j)) == 0)
+            if (strcmp(_char, cardsArrayAt(j)) == 0)
             {
                 _int = j;
                 break;
@@ -32,18 +37,19 @@ public:
     }
 
 private:
-    static constexpr const char *CARDS_ARRAY[11] = {
+    static constexpr const char *CARDS_ARRAY[CARD_MAX] = {
         "Spy", "Bishop", "Fool", "Inquisitor",
         "Judge", "Peasant", "Queen", "King",
         "Witch", "Cheat", "Widow"};
 };
+DEFINE_CARDS defCards;
 
 class EX_TYPE
 {
 public:
     static void charMustBe(const char *_char, const int &index)
     {
-        if (strcmp(_char, DEFINE_CARDS::cardsArray(index)) != 0)
+        if (strcmp(_char, DEFINE_CARDS::cardsArrayAt(index)) != 0)
         {
             throw std::logic_error("charMustBe: Prohibited char.");
         }
@@ -57,6 +63,8 @@ public:
         }
     }
 };
+
+#include "m_cards_mechs.h"
 
 class CARDS_HANDLER
 {
@@ -76,11 +84,6 @@ public:
             throw std::overflow_error("ACTION_SWITCH: Value is over the case specified.");
         }
     }
-
-private:
-    DEFINE_CARDS defCards;
 };
-
-#include "m_cards_mechs.h"
 
 #endif

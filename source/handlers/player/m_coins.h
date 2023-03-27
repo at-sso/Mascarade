@@ -13,7 +13,7 @@ public:
     // Modifies the coins value.
     int modCoins(int value)
     {
-        if (value < 0 || value > __COIN_MAX)
+        if (value < 0 || value > COIN_MAX)
         {
             throw std::invalid_argument("COINS_HANDLER: Prohibited coin value.");
         }
@@ -29,7 +29,7 @@ public:
     // Will add coins.
     void addCoins(int amount)
     {
-        if (MAIN_COINS + amount > __COIN_MAX)
+        if (MAIN_COINS + amount > COIN_MAX)
         {
             throw std::overflow_error("COINS_HANDLER: Value over 13.");
         }

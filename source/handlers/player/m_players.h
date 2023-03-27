@@ -1,7 +1,7 @@
 #ifndef M_PLAYERS_H
 #define M_PLAYERS_H
 
-static constexpr int __COIN_MAX = 13;
+static constexpr int COIN_MAX = 13;
 #include "m_coins.h"
 
 class PLAYER_HANDLER
@@ -10,7 +10,7 @@ public:
     PLAYER_HANDLER(const std::string &playerName, size_t playerAge, size_t numPlayers)
         : PLY_NAME(playerName), PLY_AGE(playerAge), NUMOF_PLY(numPlayers)
     {
-        if (numPlayers < 2 || numPlayers > __COIN_MAX)
+        if (numPlayers < 2 || numPlayers > COIN_MAX)
         {
             throw std::invalid_argument("PLAYER_HANDLER: Invalid number of players.");
         }
