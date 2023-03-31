@@ -12,8 +12,8 @@ private:
         {"no", false},
     };
 
-    template <typename T>
-    T TRY_STRING_TO_X(std::string input, bool negative)
+    template <typename TempType>
+    TempType TRY_STRING_TO_X(std::string input, float negative)
     {
         if (ANSWER_MAP.count(input) == negative)
         {

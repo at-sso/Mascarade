@@ -7,35 +7,35 @@ class RANDOM_FUNCTIONS
 {
 public:
     // Fixed returnRand template for integer declarations.
-    int returnRandInt(const int &x, const int &y)
+    int returnRandInt(const int &__x, const int &__y)
     {
-        return returnRand<int>("i", x, y);
+        return returnRand<int>("i", __x, __y);
     }
 
     // Fixed returnRand template for double declarations.
-    double returnRandDouble(const double &x, const double &y)
+    double returnRandDouble(const double &__x, const double &__y)
     {
-        return returnRand<double>("d", x, y);
+        return returnRand<double>("d", __x, __y);
     }
 
 private:
-    template <typename T>
-    T returnRand(const char *typecase, const size_t &x, const size_t &y)
+    template <typename TempType>
+    TempType returnRand(const char *_type, const size_t &x, const size_t &y)
     {
         std::random_device rd;
         std::mt19937 gen(rd());
-        switch (typecase[0])
+        switch (_type[0])
         {
         case 'd':
         {
             std::uniform_real_distribution<double> dist(x, y);
-            return static_cast<T>(dist(gen));
+            return static_cast<TempType>(dist(gen));
         }
 
         case 'i':
         {
             std::uniform_int_distribution<> dist(x, y);
-            return static_cast<T>(dist(gen));
+            return static_cast<TempType>(dist(gen));
         }
 
         default:

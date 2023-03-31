@@ -39,7 +39,7 @@ public:
         printf("Deck: ");
         for (const auto &card : deck)
         {
-            std::cout << card << " ";
+            printf(card);
         }
     }
 

@@ -47,7 +47,10 @@ public:
         return PLY_AGE;
     }
 
-    std::string getName() { return PLY_NAME; }
+    std::string getName()
+    {
+        return PLY_NAME;
+    }
 
 private:
     std::string PLY_NAME;
